@@ -1,14 +1,15 @@
 import numpy as np
 
-# Sigmoid normalizing function
-
-
 def sigmoid(x):
+    """
+    Sigmoid function that normalizes the input between 0 and 1
+    """
     return 1 / (1 + np.exp(-x))
-# Derivative of sigmoid normalizing function
-
 
 def derivative_of_sigmoid(x):
+    """
+    Derivative of sigmoid function to calculate adjustments for weight
+    """
     return x * (1 - x)
 
 
@@ -24,7 +25,7 @@ actual_outputs = np.array([[0, 0, 1, 1]]).T
 # Gets the same random numbers every time
 np.random.seed(1)
 
-# Three-by-one array of random numbers from [-1, 1):
+# Three-by-one array of random numbers from [-1, 1)
 weights = 2 * np.random.random((3, 1)) - 1
 
 # Check the starting synaptic weights
@@ -46,7 +47,7 @@ for x in range(100000):
     # If the sigmoid derivative of the output is small, the severeness of error is small (So only need smaller adjustment)
     adjustments = error * derivative_of_sigmoid(outputs)
 
-    # Dot product of input and adjustments then added to itself to give synaptic weight
+    # Dot product of input and adjustments then added to itself to adjust weight
     # If input is 0, weights aren't adjusted
     weights += np.dot(input_layer.T, adjustments)
 
